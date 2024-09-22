@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+    
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgba(82, 45, 45, 0.253);
+            color: white;
+        }
+
+        .main {
+            padding: 10px;
+            /* border: 3px solid yellow; */
+            margin: 40px;
+
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin: 12px;
+        }
+
+        div {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+            margin: 0 4px;
+        }
+
+        input {
+            padding: 7px;
+            font-weight: bold;
+
+
+        }
+
+        button {
+            background-color: blueviolet;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 10px;
+            font-weight: bolder;
+
+
+        }
+
+        .row>div {
+            font-size: 25px;
+        }
+
+        #data {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row1 {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1 style="text-align: center; color: yellow; font-family: Arial, Helvetica, sans-serif;">        Paragraph Generator        </h1>
+        <div class="row">
+            <div class="row1">
+                Paragraph:
+            </div>
+            <div class="row1">
+                <input type="number" value="5" id="items">
+            </div>
+            <div class="row1">
+                <button onclick="generate()">Generate</button>
+            </div>
+        </div>
+        <div>
+            <div class="row" id="data" style="display: block;">
+            </div>
+        </div>
+    </div>
+    
+
+
+    <script>
+        const text = ['Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas vitae, itaque amet rem accusamus placeat quis ad! Inventore cum impedit asperiores facilis praesentium quibusdam molestias. Perspiciatis commodi eos rerum ullam?',
+
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad dolorum beatae mollitia, eius quibusdam adipisci distinctio excepturi, itaque aut, dolore corrupti? Sit minus amet sapiente reiciendis debitis ipsam, recusandae vero sunt obcaecati architecto accusantium id hic suscipit. Quia, consequatur nihil illum nesciunt distinctio possimus.",
+
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae dignissimos qui libero minus alias aspernatur? Labore, nesciunt architecto. Totam aperiam explicabo quis.",
+
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus neque odit suscipit sequi laborum enim veritatis. Expedita cupiditate debitis sunt, deleniti vel minus rem cumque molestias, natus qui architecto. Saepe, mollitia pariatur! Laborum?",
+
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum impedit omnis est eligendi esse similique corporis obcaecati totam tempore minima saepe recusandae aperiam, praesentium officia inventore sed debitis. Quia, ipsum? At, temporibus assumenda. Quos facere autem iusto nostrum, sed quo soluta culpa iure beatae cupiditate placeat repellendus corporis velit dolor cumque. Beatae voluptatum obcaecati placeat?",
+
+            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. In dolorum deleniti impedit, sit quam beatae pariatur ad asperiores corporis voluptatibus exercitationem veniam vero reprehenderit? Numquam quos labore provident omnis?",
+
+            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore adipisci aspernatur ullam magni id? Sint nemo quod rerum nulla odit hic quo aspernatur illum nobis at ratione, quae voluptates iste eveniet? Modi dolor explicabo, nobis earum quo itaque minus et at. Ab itaque consectetur omnis nostrum error quae! Iure alias tempora facilis ab nesciunt?",
+
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid omnis id expedita illo, delectus, soluta nam distinctio dolore et reiciendis consectetur vel enim rerum laudantium quas unde maxime suscipit corporis optio sed consequuntur eveniet. Odit optio dicta dolorum quam vitae accusamus laboriosam voluptatem, ex vel consectetur corporis animi similique hic, adipisci quia doloribus ipsum amet assumenda quis! Perspiciatis eligendi quam amet ad repellat, enim rem adipisci possimus nam et, recusandae ex similique unde laboriosam numquam inventore!",
+
+            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos facere perferendis optio praesentium itaque. Perspiciatis nobis, quae officiis qui placeat voluptas illo esse dolorem eius fugiat nemo quod optio amet deserunt deleniti aspernatur at eaque vitae. Eligendi corporis voluptatum nihil. At animi laborum voluptates expedita maxime minus."
+
+        ]
+
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+
+            // While there remain elements to shuffle.
+            while (currentIndex != 0) {
+
+                // Pick a remaining element.
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+
+                // And swap it with the current element.
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+            }
+
+            return array;
+        }
+
+        // Used like so
+        // var arr = [2, 11, 37, 42];
+        // shuffle(arr);
+        // console.log(arr);
+
+
+
+        // console.log(text);
+
+
+
+        const item = document.querySelector('#items')
+        const datacontainet = document.querySelector('#data')
+        
+        const generate = () => {
+            // console.log(text)
+            if (isNaN(item.value) || item.value < 0 || item.value > 9) {
+                const randamindex = Math.floor(Math.random() * text.length)
+                datacontainet.innerHTML = `<p> ${text[randamindex]}`
+            } else {
+
+                const localtext = shuffle(text);
+
+                const data = text.slice(0, item.value)
+                const para = data.map(
+                    (d) => {
+                        return `<p> ${d} </p> `
+                    }
+                )
+                datacontainet.innerHTML = para.join("");
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
